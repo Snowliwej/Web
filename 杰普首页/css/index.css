@@ -1,0 +1,673 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+/*设置头部样式*/
+header{
+	width: 100%;
+	height: 122px;
+	background-color: #f8f9fb;
+}
+header .header{
+	width: 1200px;
+	height: 120px;
+	margin:0 auto;
+	
+}
+header span{
+	display: block;
+	width: 350px;
+	font-size: 34px;
+	float: left;
+	line-height: 122px;
+}
+
+/*设置搜索登录*/
+header .serch{
+	width: 780px;
+	height: 120px;
+
+	float: right;
+}
+header .serch_left{
+	width: 460px;
+	height: 35px;
+	float: left;
+	margin-top: 30px;
+}
+header .serch_left_ul{
+	width: 81px;
+	height: 32px;
+	float: left;
+	background-color: #fff;
+	border: 2px solid #6ca5f0;
+}
+header .serch_left_ul ul{
+	text-align: center;
+	line-height: 35px;
+	font-size: 14px;
+}
+header .serch_left_ul ul a{
+	color: #666;
+	display: block;
+}
+
+header .serch_left_ul ul>li>ul{
+	position: absolute;
+	width: 81px;
+	height: 96px;
+	border: 2px solid #6ca5f0;
+	display: none;
+	margin-top: 0px;
+	background-color: #fff;
+	z-index: 100;
+}
+header .serch_left_ul ul li ul a:hover{
+	background-color: blue;
+}
+header .serch_left_ul ul li:hover ul{
+	display: block;
+}
+/*select {
+    border: solid 2px #6ca5f0;
+    width: 85px;
+    height: 36px;
+    text-align: center;
+    padding-right: 14px; 
+  	float: left;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    background: url(../img/杰普首页1_03.png) no-repeat scroll right center transparent;
+
+}
+select::-ms-expand { display: none; }*/
+header .serch_left input{
+	width: 323px;
+	height: 32px;
+	padding-left: 12px;
+	border: 2px solid #6ca5f0;
+}
+header .serch_left img{
+	float: right;
+}
+header .serch_right{
+	width: 200px;
+	height: 35px;
+	float: right;
+	margin-top: 30px;
+}
+header .serch_right div{
+	width: 100px;
+	height: 35px;
+	text-align: center;
+	line-height: 35px;
+}
+header .serch_right div a{
+	display: block;
+	color: #fff;
+}
+header .serch_right .dl{
+	float: left;
+	background-color: #94d66c;
+}
+header .serch_right .dl a:hover{
+	background-color: #a9dd89;
+}
+header .serch_right .zc{
+	float: right;
+	background-color: #53cbe8;
+}
+header .serch_right .zc a:hover{
+	background-color: #74d5eb;
+}
+
+
+
+
+/*设置导航的样式*/
+nav{
+	width: 100%;
+	height: 50px;
+	background-color: #414a4f;
+}
+nav .nav{
+	width: 1200px;
+	height: 50px;
+	margin: 0 auto;
+}
+nav .nav_link{
+	width: 1200px;
+	height: 50px;
+}
+nav .nav_link li{
+	width: 171px;
+	height: 50px;
+	text-align: center;
+	display: block;
+	line-height: 50px;
+	float: left;	
+}
+nav .nav_link li>a{
+	display: block;
+	color: #fff;
+}
+nav .nav_link li a:hover{
+	background-color: #fdcb49;
+}
+
+/*设置第一li标签里超链接的的背景色一直为着色效果*/
+#active{
+	background-color: #fdcb49;
+}
+
+/*设置页面主要内容的样式*/
+section{
+	width: 100%;
+	height: 3020px;
+	background-color: #f8f9fb;
+}
+.section{
+	width: 1200px;
+	height: 3000px;
+	margin: 0 auto;
+}
+section .us{
+	width: 1200px;
+	height: 303px;
+	
+}
+/*左边的教育类别*/
+section .us_text{
+	width: 270px;
+	height: 283px;
+	float: left;
+	margin-top: 20px;
+}
+section .us_text_in{
+	width: 100%;
+	height: 90px;
+	background-color: #fff;
+	position: relative;
+	margin-bottom: 6px;
+}
+section .us_text_in_yuans{
+	width: 67px;
+	height: 67px;
+	border-radius: 50%;
+	background-color: #53cbe8;
+	position: absolute;
+	top: 12px;
+	left: 28px;
+}
+section .us_text_in_yuanz{
+	width: 67px;
+	height: 67px;
+	border-radius: 50%;
+	background-color: #6ca5f0;
+	position: absolute;
+	top: 12px;
+	left: 28px;
+}
+section .us_text_in_yuanx{
+	width: 67px;
+	height: 67px;
+	border-radius: 50%;
+	background-color: #f0747f;
+	position: absolute;
+	top: 12px;
+	left: 28px;
+}
+section .us_text_in_wz{
+	width: 128px;
+	height: 56px;
+	float: right;
+	margin-top: 13px;
+	margin-right: 33px;
+}
+section .us_text_in_wz span{
+	font-size: 14px;
+	color: #333;
+}
+section .us_text_in_wz p{
+	font-size: 12px;
+	color: #999;
+	display: block;
+	margin-top: 10px;
+}
+
+/*右边的图片*/
+section .us .us_img{
+	width: 910px;
+	height: 283px;
+	float: right;
+	margin-top: 20px;
+	
+}
+
+
+
+/*设置侧边栏的样式*/
+aside{
+	width: 270px;
+	height: 2675px;
+	float: left;
+	margin-top: 20px;
+}
+
+/*设置上面链接的样式*/
+aside .shang{
+	width: 100%;
+	height: 1555px;
+	background-color: #fff;
+}
+aside .shang .shang_tishi{
+	width: 100%;
+	height: 150px;
+	background-color: #fff;
+}
+aside .shang .shang_tishi div{
+	width: 100%;
+	height: 55px;
+	background-color: #94d66c;
+	text-align: center;
+	line-height: 55px;
+	color: #fff;
+	font-size: 20px;
+}
+aside .shang span{
+	float: left;
+	margin-top: 15px;
+	margin-left: 25px;
+}
+aside .shang span a{
+	color: black;
+}
+aside .shang .time{
+	float: right;
+	margin-top: 20px;
+	margin-right: 25px;
+	font-size: 14px;
+	color: #93bd67;
+}
+aside .shang .shang_tishi .text{
+	float: left;
+	margin-left: 25px;
+	margin-top: 25px;
+	font-size: 12px;
+	color: #adadad;
+}
+aside .shang .shang_tishi .text a{
+	color: #adadad;
+}
+aside .shang .link{
+	width: 100%px;
+	height: 150px;
+	margin-bottom: 15px;
+}
+aside .shang .link hr{
+	width: 82%;
+	margin: 0 auto;
+	color: #e3e3e3;
+}
+aside .shang .link .link_text{
+	float: left;
+	margin: 10px 25px;
+	font-size: 12px;
+	
+}
+aside .shang .link .link_text a{
+	color: #adadad;
+}
+
+/*设置中间图片的样式*/
+aside img{
+	margin-top: 10px;
+}
+
+/*设置中间链接的样式*/
+aside .zhong{
+	width: 100%;
+	height: 855px;
+	background-color: #fff;
+	margin-top: 10px;
+}
+aside .zhong_tishi{
+	width: 100%;
+	height: 135px;
+}
+aside .zhong .zhong_tishi .div{
+	width: 100%;
+	height: 55px;
+	background-color: #94d66c;
+	text-align: center;
+	line-height: 55px;
+	color: #fff;
+	font-size: 20px;
+}
+aside .zhong .span{
+	width: 100%;
+	float: left;
+	margin-top: 15px;
+	margin-left: 25px;
+}
+aside .zhong .span a{
+	color: black;
+}
+aside .zhong .time{
+	float: left;
+	margin-top: 10px;
+	margin-left: 25px;
+	font-size: 14px;
+	color: #93bd67;
+}
+aside .zhong .link{
+	width: 100%;
+	height: 80px;
+}
+aside .zhong .link hr{
+	width: 82%;
+	margin: 0 auto;
+	color: #e3e3e3;
+}
+
+/*设置侧边栏的底部*/
+aside .xia{
+	width: 100%;
+	height: 150px;
+	margin-top: 10px;
+	background-color: #fff;
+}
+aside .xia .div{
+	width: 100%;
+	height: 55px;
+	background-color: #6ca5f0;
+	text-align: center;
+	line-height: 55px;
+	color: #fff;
+	font-size: 20px;
+}
+aside .xia img{
+	margin-top: 25px;
+	margin-left: 30px;
+	float: left;
+}
+aside .xia span{
+	float: right;
+	margin-top: 30px;
+	margin-right: 140px;
+}
+aside .xia span a{
+	color: black;
+}
+aside .xia .text{
+	float: left;
+	margin-left: 25px;
+	margin-top: 10px;
+	font-size: 12px;
+}
+aside .xia .text a{
+	color: #adadad;
+}
+
+
+
+/*设置主体文本样式*/
+article{
+	width: 910px;
+	height: 900px;
+	
+	float: left;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+
+/*设置上面的一部分*/
+article .shang{
+	width: 910px;
+	height: 412px;
+}
+article .shang .shang_span{
+	float: left;
+	margin-top: 20px;
+	margin-left: 40px;
+}
+article .shang .shang_span a{
+	color: black;
+}
+article .hr_one{
+	width: 100%;
+	float: left;
+	margin-top: 15px;
+}
+
+article .shang .shang_text{
+	width: 910px;
+	height: 186px;
+	margin: 25px 0;
+	float: left;
+}
+article .shang .shang_text .one{
+	width: 100%;
+	height: 88px;
+}
+article .shang .shang_text .two{
+	width: 100%;
+	height: 88px;
+	margin-top: 10px;
+}
+article .shang .shang_text .left{
+	float: left;
+}
+article .shang .shang_text .right{
+	float: right;
+}
+article .shang .shang_text a{
+	display: block;
+}
+article .shang .shang_text a div{
+	width: 445px;
+	height: 88px;
+	background-color: #fff;
+	float: left;
+}
+article .shang .shang_text a div .shang_text_span{
+	width: 235px;
+	height: 13px;
+	font-size: 13px;
+	display: block;
+	float: left;
+	color: #666;
+	margin-top: 15px;
+	margin-left: 40px;
+	
+}
+article .shang .shang_text a div img{
+	float: right;
+	margin-top: 15px;
+	margin-right: 43px;
+}
+article .shang .shang_text a div p{
+	width: 360px;
+	color: #999;
+	font-size: 12px;
+	float: left;
+	margin: 7px 40px;
+}
+article .shang img{
+	margin-top: -12px;
+}
+
+
+/*设置下面的一部分*/
+article .xia{
+	width: 100%;
+	height: 488px;
+}
+article .xia .xia_span{
+	float: left;
+	margin-top: 30px;
+	margin-left: 40px;
+}
+article .xia .xia_span a{
+	color: black;
+}
+article .xia .xia_footer{
+	width: 100%;
+	height: 400px;
+	background-color: #fff;
+	float: left;
+	margin-top: 25px;
+}
+article .xia .xia_footer .xia_footer_li{
+	width: 720px;
+	height: 40px;
+	margin-top: 20px;
+	margin-left: 25px;
+}
+article .xia .xia_footer .xia_footer_li li{
+	width: 115px;
+	height: 40px;
+	float: left;
+	margin-right: 5px;
+	line-height: 40px;
+	text-align: center;
+}
+article .xia .xia_footer .xia_footer_li li a{
+	color: #fff;
+}
+article .xia .xia_footer .xia_footer_text{
+	width: 860px;
+	height: 265px;
+	background-color: #f8f9fb;
+	float: left;
+	margin-top: 30px;
+	margin-left: 25px;
+}
+article .xia .xia_footer .xia_footer_text .hr_two{
+	width: 95%;
+	margin: 0 auto;
+	margin-top: 40px;
+	color: #dfe0e1;
+}
+article .xia .xia_footer .xia_footer_text table{
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 15px;
+	margin-left: 25px;
+}
+article .xia .xia_footer .xia_footer_text table td{
+	height: 40px;
+}
+article .xia .xia_footer .xia_footer_text table th{
+	text-align: left;
+}
+article .xia .xia_footer .xia_footer_text table td a{
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	transition: all 0.5s;
+	color: #666;
+	font-size: 16px;
+}
+article .xia .xia_footer .xia_footer_text table td a:hover{
+	margin-left: 30px;
+}
+article .xia .xia_footer .xia_footer_text table tr{
+	transition: all 0.5s;
+}
+article .xia .xia_footer .xia_footer_text table tr:hover{
+	background-color: #fff;
+}
+
+
+/*设置页面底部的样式*/
+footer{
+	width: 100%;
+	height: 205px;
+	background-color: #f8f9fb;
+}
+footer .address{
+	width: 1200px;
+	height: 125px;
+	margin: 0 auto;
+}
+hr{
+	color: #d3d6d9;
+}
+footer .address span{
+	float: left;
+	margin-top: 30px;
+	margin-left: 5px;
+	font-size: 14px;
+	color: #6c6c6c;
+}
+footer .address .shang li{
+	float: left;
+	font-size: 13px;
+	display: block;
+	margin-top: 30px;
+	padding-left: 10px;
+	margin-right: 10px;
+	border-left: 1px solid #6c6c6c;
+}
+footer .address .shang li:first-child{
+	margin-left: -5px;
+	border-left: 0px;
+}
+footer .address .shang li a{
+	color: #6c6c6c;
+}
+footer .xia{
+	display: block;
+	margin: 10px 125px;
+}
+footer .address .xia li{
+	float: left;
+	font-size: 13px;
+	display: block;
+	margin-top: 10px;
+	padding-left: 10px;
+	margin-right: 10px;
+	border-left: 1px solid #6c6c6c;
+}
+footer .address .xia li a{
+	color: #6c6c6c;
+}
+
+/*设置底部link部分*/
+footer .link{
+	width: 1366px;
+	height: 80px;
+	background-color: #00FFFF;
+	margin: 0 auto;
+	display: flex;
+}
+footer .link div{
+	float: left;
+}
+
+footer .link .left{
+	width: 25%;
+	height: 100%;
+	background-color: #ffc532;
+	
+}
+footer .link .center{
+	width: 50%;
+	height: 100%;
+	background-color: #53cbe8;
+
+}
+footer .link .right{
+	width: 25%;
+	height: 100%;
+	background-color: yellow;
+}

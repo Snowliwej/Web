@@ -1,0 +1,279 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+li{
+	list-style: none;
+}
+/*整体的大小*/
+.out{
+	width: 750px;
+	height: 1280px;
+	border: 1px solid black;
+	margin: 0 auto;
+	background:url(../img/banner.jpg)no-repeat;
+	background-size: 100% 100%;
+	position: relative;
+	
+}
+/*两个虚线的圆*/
+.out .xuyuanl{
+	width: 720px;
+	height: 720px;
+	border: 2px dotted orange;
+	border-radius:50% ;
+	margin-top: 215px;
+	float: left;
+}
+.out .xuyuanR{
+	width: 730px;
+	height: 730px;
+	border: 2px dotted orange;
+	border-radius:50% ;
+	margin-top: 215px;
+	float: right;
+	position: absolute;
+	top:-15px;
+	left: 15px;
+/*	z-index: -5;*/
+	
+}
+.out .dianS{
+	width: 20px;
+	height: 20px;
+	background-color: orange;
+	border-radius: 50%;
+	position: absolute;
+	top: 265px;
+	left: 155px;
+}
+.out .dianD{
+	width: 20px;
+	height: 20px;
+	background-color: orange;
+	border-radius: 50%;
+	position: absolute;
+	top:910px;
+	left: 465px;
+}
+/*里面透明的圆*/
+.out .inner{
+	width: 670px;
+	height: 670px;
+	background: #333;
+	border-radius: 50%;
+	opacity: 0.6;
+	
+	float: left;
+	margin:0 auto;
+	margin-top: 20px;
+	margin-left: 40px;
+	
+}
+/*logo图片*/
+.out .inner .img1{
+	width: 140px;
+	height: 45px;
+	margin:25px auto;
+	display: block;
+}
+
+/*form表单*/
+.out .xuyuanl .inner form{
+	width: 380px;
+	height: 500px;
+	/*border: 1px solid red;*/
+	margin: 0 auto;
+	opacity: 1;
+}
+.out .xuyuanl .inner form .inputs{
+	border: 2px solid #fff;
+	
+	width: 376px;
+	height: 75px;
+	margin-bottom: 25px;
+	border-radius: 5px;
+	line-height: 75px;
+	position: relative;
+	
+	
+}
+.out .xuyuanl  .inner form .inputs span{
+	color: #fff;
+	font-size: 24px;
+	
+	float: left;
+	margin-left: 15px;
+	
+}
+.out .xuyuanl .inner form .inputs input{
+	background: none;
+	width: 210px;
+	height: 75px;
+	font-size: 24px;
+	color: #fff;
+	border: 0px;
+	float: left;
+	/*background: red;*/	
+}
+/*form表单中的下拉列表*/
+.out .xuyuanl .inner form .inputs ul{
+	width: 350px;
+	height: 75px;
+	/*background-color: yellow;*/
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 100;
+	font-size: 24px;
+	color: #fff;
+	overflow: hidden;
+}
+.out .xuyuanl .inner form .inputs ul li{
+	width: 350px;
+	height: 75px;
+}
+.out .xuyuanl .inner form .inputs ul li#blank:hover{
+	background:none;
+}
+.out .xuyuanl .inner form .inputs ul li:hover{
+	background-color: aqua;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.out .xuyuanl .inner form .inputs .jiantou{
+	width:24px;
+	height: 60px;
+	/*background-color: red;*/
+	position: absolute;
+	top: 10px;
+	right: 0px;
+}
+.out .xuyuanl .inner form .inputs .jiantou:hover{
+	cursor: pointer;
+}
+/*.out .xuyuanl .inner form .inputs select{
+	width: 100%;
+	height: 100%;
+	background: none;
+	border: 0px;
+	font-size: 24px;
+	color: #fff;
+	
+}*/
+/*.out .xuyuanl .inner form .inputs select option{
+	font-size: 24px;
+	color: #fff;
+	background: #333;
+	
+}*/
+.out .xuyuanl .inner form .inputs #show{
+	width: 150px;
+	height: 100%;
+	/*background: red;*/
+	margin-left: 110px;
+	color: #fff;
+	font-size: 24px;
+}
+.out .xuyuanl .inner form .inputs #text{
+	width: 110px;
+	height: 100%;
+	/*border: 1px solid black;*/
+	margin-top: -75px;
+	float: right;
+	color: orange;
+	text-align: center;
+}
+
+
+
+/*下面的一部分*/
+.out .down{
+	width: 380px;
+	height: 255px;
+	/*background: yellow;*/
+	float: left;
+	
+	margin-top: 56px;
+	margin-left: 190px;
+	
+}
+/*同意协议*/
+.out .down .checkbox{
+	margin:0px auto;
+	/*border: 1px solid black;*/
+	height: 50px;
+	line-height: 50px;
+}
+.out .down .checkbox .duigou{
+	width: 18px;
+	height: 18px;
+	border: 3px solid orange;
+	float: left;
+	margin-top: 18px;
+	/*background: url(../img/duigou.png) no-repeat;*/
+	/*background-size: 18px 18px;*/
+	
+	
+}
+.out .down .checkbox .duigou ul li{
+	list-style: none;
+}
+.out .down .checkbox .duigou ul li img{
+	width: 18px;
+	height: 18px;
+	float: left;
+}
+.out .down .checkbox span{
+	color: #fff;
+	font-size: 22px;
+	
+	float: left;
+	margin-left: 15px;
+}
+/*注册按钮*/
+.out .down .zhuce{
+	width: 190px;
+	height: 75px;
+	margin: 0 auto;
+	margin-top: 65px;
+	
+}
+.out .down .zhuce input{
+	width: 190px;
+	height: 75px;
+	background-color: #f57129;
+	border: 0px;
+	color: #fff;
+	font-size: 26px;
+}
+.out .down .zhuce input:hover{
+	cursor: pointer;
+	opacity: 0.9;
+}
+
+/*底部的两个按钮*/
+.out .down .footer{
+	width: 100%;
+	height: 35px;
+	margin-top: 50px;
+}
+.out .down .footer button{
+	width: 110px;
+	height: 35px;
+	background: none;
+	border: 0;
+	color: #fff;
+	font-size: 24px;
+	
+}
+.out .down .footer button:hover{
+	cursor: pointer;
+}
+.out .down .footer .left{
+	float: left;
+}
+.out .down .footer .right{
+	float: right;
+}
+

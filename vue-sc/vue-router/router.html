@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>路由</title>
+		<script src="../js/jquery-3.0.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-router.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/element-ui.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/element-ui.css"/>
+		 <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+
+		<style type="text/css">
+			
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			.tac{
+				float: left;
+				background-color: yellow;
+			}
+			.a{
+				color: #ccc;
+				text-decoration: none;
+			}
+			/*.nav{
+				height: 590px;
+				background-color: #324157;
+			}*/
+			.body{
+				width: 1280px;
+				height: 590px;
+				margin: 0 auto;
+			}
+			.nav a{
+				color: #000;
+				text-decoration: none;
+				font-size: 18px;
+			}
+			.ziti a{
+				font-size:15px ;
+			}
+			.leftnav{
+				height: 590px;
+				background-color: #eef1f6;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="body">
+				
+			
+			<div class="nav">
+				<!--左侧导航-->
+				  <el-col :span="4" class='leftnav'>
+				    <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+				      <el-submenu index="1">
+				        <template slot="title"><i class="el-icon-message"></i><router-link to='/student'>学生管理</router-link></template>
+				        <el-menu-item-group class='ziti'>
+				          <el-menu-item index="1-1"><router-link to='/student/info'>档案管理</router-link></el-menu-item>
+				          <el-menu-item index="1-2"><router-link to='/student/grade'>成绩管理</router-link></el-menu-item>
+				        </el-menu-item-group>  
+				      </el-submenu>
+				        <el-submenu index="2">
+				        <template slot="title"><i class="el-icon-menu"></i><router-link to='/student'>课程管理</router-link></template>
+				        <el-menu-item-group class='ziti'>
+				          <el-menu-item index="2-1"><router-link to='/course/info'>课程信息</router-link></el-menu-item>
+				          <el-menu-item index="2-2"><router-link to='/course/teacher'>任课信息</router-link></el-menu-item>
+				        </el-menu-item-group>  
+				      </el-submenu>
+				      <el-menu-item index="3"><i class="el-icon-setting"></i><router-link to='/clazz'>班级管理</router-link></el-menu-item>
+				      <el-menu-item index="4"><i class="el-icon-share"></i><router-link to='/studentcourse'>选课管理</router-link></el-menu-item>
+				    </el-menu>
+				  </el-col>
+			</div>
+			<el-col :span='20'>
+				<router-view></router-view>
+			</el-col>
+			
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			//1.自定义组件
+			//学生组件
+			var Student={
+				template:`
+					<div>
+						<h2>{{title}}</h2>
+						<hr />
+						
+						<div>
+							<router-view></router-view>
+						</div>
+						
+					</div>
+				`,
+				data:function(){
+					return {
+						title:'学生管理'
+					}
+				}
+			};
+			//课程组件
+			var Course={
+				template:`
+					<div>
+						<h2>{{title}}</h2>
+						<hr />
+						
+						<div>
+							<router-view></router-view>
+						</div>
+						
+					</div>
+				`,
+				data:function(){
+					return {
+						title:'课程管理'
+					}
+				}
+			};
+			//课程信息
+			var CourseInfo={
+				template:`	
+				<div>
+					<el-button type="text" @click='handleSingleImport'>单个录入</el-button>
+					<el-button type="text">批量录入</el-button>
+					<el-table :data="courseInfo"  style="width: 100%">
+						<el-table-column prop="name" label="课程名称" ></el-table-column>
+						<el-table-column prop="credit" label="学分" ></el-table-column>
+						
+					    <el-table-column label="操作">
+					      <template scope="scope">
+					        <el-button
+					          size="small"
+					          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+					        <el-button
+					          size="small"
+					          type="danger"
+					          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+					      </template>
+					    </el-table-column>
+					</el-table>	
+					<!--对话框-->
+					<el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible">
+					  <el-form :model="form">
+					    <el-form-item label="课程名称" >
+					      <el-input v-model="form.name" auto-complete="off"></el-input>
+					    </el-form-item>
+					    <el-form-item label="学分" >
+					      <el-input v-model="form.credit" auto-complete="off"></el-input>
+					    </el-form-item>
+					    
+					  </el-form>
+					  <div slot="footer" class="dialog-footer">
+					    <el-button @click="dialogFormVisible = false">取 消</el-button>
+					    <el-button type="primary"  @click='handleSubmit'>确 定</el-button>
+					  </div>
+					</el-dialog>
+					
+				</div>
+				
+				`,
+				methods:{
+					handleSingleImport:function(){
+						this.dialogFormVisible=true;
+						this.dialogTitle='录入课程信息';
+						this.form={};
+						
+						
+					},
+					//弹出框中确定修改
+					handleSubmit:function(){
+						this.dialogFormVisible=false;
+
+						var vm = this;
+						alert(vm.form.id);
+						var url = 'http://192.168.174.129:3000/course/update';
+						if(!vm.form.id){
+							var url = 'http://192.168.174.129:3000/course/save';
+							
+						}
+						
+						
+						
+						$.post(url,this.form,function(data){
+							console.log(data);
+							if(data.affectedRows>0){
+								vm.$message({
+						            type: 'success',
+						            message: '操作成功!'
+						        });
+						        
+						        var url='http://192.168.174.129:3000/course/findALL';
+//								var vm = this;
+								$.getJSON(url,function(data){
+									console.log(data);
+									vm.courseInfo = data;
+								})
+						        
+							}
+						})
+					},
+					//修改学生信息
+					handleEdit:function(index,row){
+						this.dialogFormVisible=true;
+						this.dialogTitle='修改课程信息';
+						this.form=row;
+					},
+					//删除学生信息
+					handleDelete:function(index,row){
+						var vm = this;
+						this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+				          confirmButtonText: '确定',
+				          cancelButtonText: '取消',
+				          type: 'warning'
+				        }).then(() => {
+				        	var url='http://192.168.174.129:3000/course/batchDelete'
+				          $.post(url,{
+				          	ids:JSON.stringify([row.id])
+				          },function(data){
+				          	if(data.affectedRows>0){
+				          		vm.$message({
+						            type: 'success',
+						            message: '删除成功!'
+						        });
+				          	}
+				          	var url='http://192.168.174.129:3000/course/findALL';
+//							var vm = this;
+							$.getJSON(url,function(data){
+								console.log(data);
+								vm.courseInfo = data;
+							})
+				          });
+				          //刷新studentInfo
+						    
+				        }).catch(() => {
+				          this.$message({
+				            type: 'info',
+				            message: '已取消删除'
+				          });          
+				        });
+					}
+				},
+				created:function(){
+					//加载学生的数据
+					var url='http://192.168.174.129:3000/course/findALL';
+					var vm = this;
+					$.getJSON(url,function(data){
+						console.log(data);
+						vm.courseInfo = data;
+					})
+				},
+				data:function(){
+					return {
+						courseInfo:[],
+						dialogTitle:'',
+						dialogFormVisible:false,
+						form:{},
+					}
+				}
+			}
+			//任课信息
+			var CourseTeacher={
+				template:`
+					<p>任课信息</p>
+				`,
+				data:function(){
+					return {
+						
+					}
+				}
+				
+			};
+			//学生档案模块
+			var StudentInfo={
+				template:`	
+				<div>
+					<el-button type="text" @click='handleSingleImport'>单个录入</el-button>
+					<el-button type="text">批量录入</el-button>
+					<el-table :data="studentInfo"  style="width: 100%">
+						<el-table-column prop="name" label="姓名" ></el-table-column>
+						<el-table-column prop="gender" label="性别" ></el-table-column>
+						<el-table-column prop="class_id" label="班级编号"></el-table-column>
+					    <el-table-column label="操作">
+					      <template scope="scope">
+					        <el-button
+					          size="small"
+					          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+					        <el-button
+					          size="small"
+					          type="danger"
+					          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+					      </template>
+					    </el-table-column>
+					</el-table>	
+					<!--对话框-->
+					<el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible">
+					  <el-form :model="form">
+					    <el-form-item label="姓名" >
+					      <el-input v-model="form.name" auto-complete="off"></el-input>
+					    </el-form-item>
+					    <el-form-item label="性别" >
+					      <el-radio class="radio" v-model="form.gender" label="男">男</el-radio>
+  						  <el-radio class="radio" v-model="form.gender" label="女">女</el-radio>
+					    </el-form-item>
+					    <el-form-item label="班级编号" >
+					      <el-input v-model="form.class_id" auto-complete="off"></el-input>
+					    </el-form-item>
+					  </el-form>
+					 
+					  <div slot="footer" class="dialog-footer">
+					    <el-button @click="dialogFormVisible = false">取 消</el-button>
+					    <el-button type="primary"  @click='handleSubmit'>确 定</el-button>
+					  </div>
+					</el-dialog>
+					
+				</div>
+				
+				`,
+				methods:{
+					handleSingleImport:function(){
+						this.dialogFormVisible=true;
+						this.dialogTitle='录入学生信息';
+						this.form={gender:'男'};
+						
+					},
+					//弹出框中确定修改
+					handleSubmit:function(){
+						this.dialogFormVisible=false;
+						
+						var vm = this;
+						var url = 'http://192.168.174.129:3000/student/update';
+						if(!vm.form.id){
+							var url = 'http://192.168.174.129:3000/student/save';
+							this.form.password='123321';
+						}
+						
+						this.form.birth='1992-02-02';
+						
+						
+						$.post(url,this.form,function(data){
+							console.log(data);
+							if(data.affectedRows>0){
+								vm.$message({
+						            type: 'success',
+						            message: '操作成功!'
+						        });
+						        
+						        var url='http://192.168.174.129:3000/student/findALL';
+
+								$.getJSON(url,function(data){
+									console.log(data);
+									vm.studentInfo = data;
+								})
+						        
+							}
+						})
+					},
+					//修改学生信息
+					handleEdit:function(index,row){
+						this.dialogFormVisible=true;
+						this.dialogTitle='修改学生信息';
+						this.form=row;
+						
+					},
+					//删除学生信息
+					handleDelete:function(index,row){
+						var vm = this;
+						this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+				          confirmButtonText: '确定',
+				          cancelButtonText: '取消',
+				          type: 'warning'
+				        }).then(() => {
+				        	var url='http://192.168.174.129:3000/student/batchDelete'
+				          $.post(url,{
+				          	ids:JSON.stringify([row.id])
+				          },function(data){
+				          	if(data.affectedRows>0){
+				          		vm.$message({
+						            type: 'success',
+						            message: '删除成功!'
+						        });
+				          	}
+				          	var url='http://192.168.174.129:3000/student/findALL';
+
+							$.getJSON(url,function(data){
+								console.log(data);
+								vm.studentInfo = data;
+							})
+				          });
+				          //刷新studentInfo
+						    
+				        }).catch(() => {
+				          this.$message({
+				            type: 'info',
+				            message: '已取消删除'
+				          });          
+				        });
+					}
+				},
+				created:function(){
+					//加载学生的数据
+					var url='http://192.168.174.129:3000/student/findALL';
+					var vm = this;
+					$.getJSON(url,function(data){
+						console.log(data);
+						vm.studentInfo = data;
+					})
+				},
+				data:function(){
+					return {
+						studentInfo:[],
+						dialogTitle:'',
+						dialogFormVisible:false,
+						form:{},
+					}
+				}
+			};
+			//学生成绩模块
+			var StudentGrade={
+				template:`
+				<div>
+					<el-button type="text" @click='handleSingleImport'>单个录入</el-button>
+					<el-button type="text">批量录入</el-button>
+					<el-table :data="studentGrade"  style="width: 100%">
+						<el-table-column prop="student_id" label="学生编号" ></el-table-column>
+						<el-table-column prop="grade" label="成绩" ></el-table-column>
+						
+					    <el-table-column label="操作">
+					      <template scope="scope">
+					        <el-button
+					          size="small"
+					          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+					        <el-button
+					          size="small"
+					          type="danger"
+					          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+					      </template>
+					    </el-table-column>
+					</el-table>	
+					<!--对话框-->
+					<el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible">
+					  <el-form :model="form">
+					    <el-form-item label="班级名称" >
+					      <el-input v-model="form.name" auto-complete="off"></el-input>
+					    </el-form-item>
+					    
+					  </el-form>
+					  <div slot="footer" class="dialog-footer">
+					    <el-button @click="dialogFormVisible = false">取 消</el-button>
+					    <el-button type="primary"  @click='handleSubmit'>确 定</el-button>
+					  </div>
+					</el-dialog>
+				</div>
+				`,
+				
+				methods:{
+					handleSingleImport:function(){
+						this.dialogFormVisible=true;
+						this.dialogTitle='录入学生信息';
+						this.form={gender:'男'};
+						
+					},
+					//弹出框中确定修改
+					handleSubmit:function(){
+						this.dialogFormVisible=false;
+						
+						var vm = this;
+						var url = 'http://192.168.174.129:3000/student/update';
+						if(!vm.form.id){
+							var url = 'http://192.168.174.129:3000/student/save';
+							this.form.password='123321';
+						}
+						
+						this.form.birth='1992-02-02';
+						this.form.class_id=1;
+						console.log(this.form)
+						$.post(url,this.form,function(data){
+							console.log(data);
+							if(data.affectedRows>0){
+								vm.$message({
+						            type: 'success',
+						            message: '操作成功!'
+						        });
+						        
+						        var url='http://192.168.174.129:3000/studentCourse/selectCourse';
+
+								$.getJSON(url,function(data){
+									console.log(data);
+									vm.studentGrade = data;
+								})
+						        
+							}
+						})
+					},
+					//修改学生信息
+					handleEdit:function(index,row){
+						this.dialogFormVisible=true;
+						this.dialogTitle='修改学生信息';
+						this.form=row;
+					},
+					//删除学生信息
+					handleDelete:function(index,row){
+						var vm = this;
+						this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+				          confirmButtonText: '确定',
+				          cancelButtonText: '取消',
+				          type: 'warning'
+				        }).then(() => {
+				        	var url='http://192.168.174.129:3000/student/batchDelete'
+				          $.post(url,{
+				          	ids:JSON.stringify([row.id])
+				          },function(data){
+				          	if(data.affectedRows>0){
+				          		vm.$message({
+						            type: 'success',
+						            message: '删除成功!'
+						        });
+				          	}
+				          	var url='http://192.168.174.129:3000/studentCourse/selectCourse';
+
+							$.getJSON(url,function(data){
+								console.log(data);
+								vm.studentGrade = data;
+							})
+				          });
+				          //刷新studentInfo
+						    
+				        }).catch(() => {
+				          this.$message({
+				            type: 'info',
+				            message: '已取消删除'
+				          });          
+				        });
+					}
+				},
+				created:function(){
+					//加载学生的数据
+					var url='http://192.168.174.129:3000/studentCourse/selectCourse';
+					var vm = this;
+					$.getJSON(url,function(data){
+						console.log(data);
+						vm.studentGrade = data;
+					})
+				},
+				data:function(){
+					return {
+						studentGrade:[],
+						dialogTitle:'',
+						dialogFormVisible:false,
+						form:{},
+					}
+				}
+				
+			};
+			//班级组件
+			var Clazz={
+				template:`
+					<div>
+						<h2>{{title}}</h2>
+						<hr />
+						<el-button type="text" @click='handleSingleImport'>单个录入</el-button>
+					<el-button type="text">批量录入</el-button>
+					<el-table :data="studentInfo"  style="width: 100%">
+						<el-table-column prop="id" label="班级编号" ></el-table-column>
+						<el-table-column prop="name" label="班级名称" ></el-table-column>
+						
+					    <el-table-column label="操作">
+					      <template scope="scope">
+					        <el-button
+					          size="small"
+					          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+					        <el-button
+					          size="small"
+					          type="danger"
+					          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+					      </template>
+					    </el-table-column>
+					</el-table>	
+					<!--对话框-->
+					<el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible">
+					  <el-form :model="form">
+					    <el-form-item label="班级名称" >
+					      <el-input v-model="form.name" auto-complete="off"></el-input>
+					    </el-form-item>
+					    
+					  </el-form>
+					  <div slot="footer" class="dialog-footer">
+					    <el-button @click="dialogFormVisible = false">取 消</el-button>
+					    <el-button type="primary"  @click='handleSubmit'>确 定</el-button>
+					  </div>
+					</el-dialog>
+						
+					</div>
+				`,
+				methods:{
+					handleSingleImport:function(){
+						this.dialogFormVisible=true;
+						this.dialogTitle='录入班级信息';
+						this.form={};
+						console.log(this.form)
+						
+					},
+					//弹出框中确定修改
+					handleSubmit:function(){
+						this.dialogFormVisible=false;
+						
+						var vm = this;
+						var url = 'http://192.168.174.129:3000/clazz/update';
+						if(!vm.form.id){
+							
+							var url = 'http://192.168.174.129:3000/clazz/save';
+							
+							
+						}
+						
+//						console.log(this.form.id)
+						$.post(url,this.form,function(data){
+							console.log(data);
+							if(data.affectedRows>0){
+								vm.$message({
+						            type: 'success',
+						            message: '操作成功!'
+						        });
+						        
+						        var url='http://192.168.174.129:3000/clazz/findALL';
+
+								$.getJSON(url,function(data){
+									console.log(data);
+									vm.studentInfo = data;
+								})
+						        
+							}
+						})
+					},
+					//修改班级信息
+					handleEdit:function(index,row){
+						this.dialogFormVisible=true;
+						this.dialogTitle='修改班级信息';
+						this.form=row;
+					},
+					//删除班级信息
+					handleDelete:function(index,row){
+						var vm = this;
+						this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+				          confirmButtonText: '确定',
+				          cancelButtonText: '取消',
+				          type: 'warning'
+				        }).then(() => {
+				        	var url='http://192.168.174.129:3000/clazz/batchDelete'
+				          $.post(url,{
+				          	ids:JSON.stringify([row.id])
+				          },function(data){
+				          	if(data.affectedRows>0){
+				          		vm.$message({
+						            type: 'success',
+						            message: '删除成功!'
+						        });
+				          	}
+				          	var url='http://192.168.174.129:3000/clazz/findALL';
+
+							$.getJSON(url,function(data){
+								console.log(data);
+								vm.studentInfo = data;
+							})
+				          });
+				          //刷新studentInfo
+						    
+				        }).catch(() => {
+				          this.$message({
+				            type: 'info',
+				            message: '已取消删除'
+				          });          
+				        });
+					}
+				},
+				created:function(){
+					//加载班级的数据
+					var url='http://192.168.174.129:3000/clazz/findALL';
+					var vm = this;
+					$.getJSON(url,function(data){
+						console.log(data);
+						vm.studentInfo = data;
+					})
+				},
+				data:function(){
+					return {
+						title:'班级管理',
+						studentInfo:[],
+						dialogTitle:'',
+						dialogFormVisible:false,
+						form:{},
+					}
+				}
+						
+			};
+			//选课组件
+			var Studentcourse={
+				template:`
+					<div>
+						<h2>{{title}}</h2>
+						<hr />
+						<el-button type="text" @click='handleSingleImport'>单个录入</el-button>
+					<el-button type="text">批量录入</el-button>
+					<el-table :data="studentInfo"  style="width: 100%">
+						<el-table-column prop="s.name" label="学生姓名" ></el-table-column>
+						<el-table-column prop="c.name" label="课程名称" ></el-table-column>
+						<el-table-column prop="sc.grade" label="成绩" ></el-table-column>
+						<el-table-column prop="c.credit" label="学分" ></el-table-column>
+						
+					    <el-table-column label="操作">
+					      <template scope="scope">
+					        <el-button
+					          size="small"
+					          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+					        <el-button
+					          size="small"
+					          type="danger"
+					          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+					      </template>
+					    </el-table-column>
+					</el-table>	
+					<!--打分对话框-->
+					<el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible">
+					  <el-form :model="form">
+					    <el-form-item label="学生姓名" :model='student'>
+					      <el-input v-model="student.name" auto-complete="off"></el-input>  
+					    </el-form-item>
+					    
+					    <el-form-item label="课程名称" :model='course'>
+					      <el-input v-model="course.name" auto-complete="off"></el-input>  
+					    </el-form-item>
+					    
+					    <el-form-item label="成绩" :model='sc'>
+					      <el-input v-model="sc.grade" auto-complete="off"></el-input>
+					      
+					     
+					    </el-form-item>
+					    
+					  </el-form>
+					  <div slot="footer" class="dialog-footer">
+					    <el-button @click="dialogFormVisible = false">取 消</el-button>
+					    <el-button type="primary"  @click='handleSubmit'>确 定</el-button>
+					  </div>
+					</el-dialog>
+					<!--选课对话框-->
+					<el-dialog :title="dialogTitle" :visible.sync="dialogFormVisibleX">
+					  <el-form :model="form">
+					    
+					    <el-form-item label="学生编号" :model='sc'>
+					      <el-input v-model="sc.student_id" auto-complete="off"></el-input>  
+					    </el-form-item>
+					    
+					    <el-form-item label="课程编号" :model='sc'>
+					      <el-input v-model="sc.course_id" auto-complete="off"></el-input> 
+					    </el-form-item>  
+					  </el-form>
+					  <div slot="footer" class="dialog-footer">
+					    <el-button @click="close">取 消</el-button>
+					    <el-button type="primary"  @click='handleSubmit'>确 定</el-button>
+					  </div>
+					</el-dialog>
+					</div>
+					
+				`,
+				methods:{
+					close:function(){
+						this.dialogFormVisibleX=false;
+						this.dialogFormVisible=false;
+					},
+					handleSingleImport:function(){
+						this.dialogFormVisibleX=true;
+						this.dialogTitle='选课信息';
+						this.sc={};
+						
+						
+					},
+					//弹出框中确定修改
+					handleSubmit:function(){
+						this.dialogFormVisibleX=false;
+						this.dialogFormVisible=false;
+						
+						var vm = this;
+						
+						var url = 'http://192.168.174.129:3000/sc/score';
+						if(!vm.sc.id){
+							
+							var url = 'http://192.168.174.129:3000/sc/selectCourse';
+							
+						}
+						
+						console.log(this.sc.grade)
+//						console.log(this.form)
+						$.post(url,this.sc,function(data){
+							console.log(data)
+							if(data.affectedRows>0){
+								vm.$message({
+						            type: 'success',
+						            message: '操作成功!'
+						        });
+						        
+						        var url='http://192.168.174.129:3000/sc/findAll';
+
+								$.getJSON(url,function(data){
+									console.log(data);
+									vm.studentInfo = data;
+								})
+						        
+							}
+						})
+					},
+					//修改班级信息
+					handleEdit:function(index,row){
+						this.dialogFormVisible=true;
+						this.dialogTitle='修改信息';
+						this.form=row;
+						this.student=row.s;
+						this.course=row.c;
+						this.sc=row.sc;
+						
+					},
+					//删除班级信息
+					handleDelete:function(index,row){
+						var vm = this;
+						this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+				          confirmButtonText: '确定',
+				          cancelButtonText: '取消',
+				          type: 'warning'
+				        }).then(() => {
+				        	var url='http://192.168.174.129:3000/sc/cancelCourse'
+//				        	console.log(row.sc)
+				          $.post(url,row.sc,function(data){
+				          	console.log(data)
+				          	if(data.affectedRows>0){
+				          		vm.$message({
+						            type: 'success',
+						            message: '删除成功!'
+						        });
+				          	}
+				          	var url='http://192.168.174.129:3000/sc/findAll';
+
+							$.getJSON(url,function(data){
+								console.log(data);
+								vm.studentInfo = data;
+							})
+				          });
+				          //刷新studentInfo
+						    
+				        }).catch(() => {
+				          this.$message({
+				            type: 'info',
+				            message: '已取消删除'
+				          });          
+				        });
+					}
+				},
+				created:function(){
+					//加载选课的数据
+					var url='http://192.168.174.129:3000/sc/findAll';
+					var vm = this;
+					
+					$.getJSON(url,function(data){
+//						alert(1)
+						console.log(data);
+						vm.studentInfo = data;
+					})
+				},
+				data:function(){
+					return {
+						title:'选课管理',
+						studentInfo:[],
+						dialogTitle:'',
+						dialogFormVisible:false,
+						dialogFormVisibleX:false,
+						form:{},
+						student:{},
+						course:{},
+						sc:{},
+					}
+				}
+			};
+			//2.创建vue-router实例对象
+			var router = new VueRouter({
+				routes:[{
+					path:'/student',
+					component:Student,
+					children:[{
+						path:'info',
+						component:StudentInfo
+					},{
+						path:'grade',
+						component:StudentGrade
+					}]
+				},{
+					path:'/course',
+					component:Course,
+					children:[{
+						path:'info',
+						component:CourseInfo
+					},{
+						path:'teacher',
+						component:CourseTeacher
+					}]
+				},{
+					path:'/clazz',
+					component:Clazz
+				},{
+					path:'/studentcourse',
+					component:Studentcourse
+				},]
+			});
+			
+			//3.在vue中使用router
+			new Vue({
+				el:'#app', 
+				router:router,
+				methods:{
+					handleOpen:function(){
+						
+					},
+					handleClose:function(){
+						
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

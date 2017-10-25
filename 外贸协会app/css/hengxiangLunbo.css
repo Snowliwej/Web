@@ -1,0 +1,72 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+li{
+	list-style: none;
+}
+.outer{
+	width: 660px;
+	height: 350px;
+	margin: 10px auto;
+	/*border: 1px solid black;*/
+	/*background-color: #f1f1f1;*/
+	overflow: hidden;
+}
+.outer .shang{
+	width: 660px;
+	height: 315px;
+	float: left;
+	/*background-color: palegoldenrod;*/
+	position: relative;
+}
+.outer #top{
+	width: 2000px;
+	height: 310px;
+	
+	position: absolute;
+	left: 0;
+	
+}
+.outer #top li{
+	float: left;
+	width: 198px;
+	height: 306px;
+	/*border: 1px solid #A0A0A0;*/
+	margin-left: 15px;
+}
+.outer #top .foucs{
+	border: 5px solid orange;
+}
+.outer #top li img{
+	width: 198px;
+	height: 306px;
+}
+
+
+.outer .xia{
+	width: 660px;
+	height: 35px;
+	/*background-color: palegreen;*/
+	float: left;
+}
+/*num的样式*/
+.outer #num{
+	display: block;
+	width: 200px;
+	height: 10px;
+	margin: 10px auto;
+}
+.outer #num li{
+	width: 30px;
+	height: 10px;
+	border-radius: 5px;
+	background-color: #666;
+	float: left;
+	margin-left: 10px;
+}
+.outer #num .click{
+	background-color: orange;
+}
+
+

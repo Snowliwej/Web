@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片轮播</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+				
+			}
+			
+			ul li{
+				list-style: none;
+			}
+			/*左侧div*/
+			#left{
+				width: 160px;
+				height: 430px;
+				border: 1px solid black;
+				float: left;
+				margin-top: 30px;
+				margin-left: 30px;
+				padding: 20px;
+				
+			}
+			#left ul li{
+				width: 130px;
+				height: 130px;
+				margin: 0 auto;
+				margin-bottom: 20px;
+			
+				
+			}
+			#left ul li img{
+				width: 130px;
+				height: 130px;
+			}
+			
+			/*右侧div*/
+			#right{
+				width: 460px;
+				height: 430px;
+				border: 1px solid black;
+				float: left;
+				/*overflow: hidden;*/
+				padding: 20px;
+				margin-top: 30px;
+				margin-left: 30px;
+				
+			}
+			#right li{
+				width: 460px;
+				height: 430px;
+				margin-bottom: 30px;
+			
+			}
+			#right li img{
+				
+				width: 460px;
+				height: 430px;
+			}
+			
+			
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				
+				var leftul =document.getElementById("leftul");
+				var leftlis = leftul.children;
+				//alert(leftlis.length);
+				var rightul = document.getElementById("rightul");
+				
+				
+				//使用事件代理绑定事件
+				leftul.onmouseover =function(event){
+					if(event.target.nodeName == "IMG"){
+						
+						//先清除所有li的样式
+						Array.prototype.slice.call(leftlis,0).forEach(function(item){
+							item.className = "";
+						});
+						
+						
+						//给当前li添加样式
+						event.target.parentNode.className="current";
+						
+						
+						//左侧缩略图匹配右侧大图
+						var index = event.target.parentNode.getAttribute("val");
+						console.log(val);
+						
+						//右侧轮播
+						move(-(450*index));
+					}
+				}
+				
+				//封装大图轮播函数
+				function nove(pos){
+					var m = function(){
+						var nowPos = parseInt(parrightUI.style.top);
+						var speed = 60;
+						
+						if(Math.abs(nowPos-pos)>speed){
+							nowPos -= ((nowPos-pos)/Math.abs(nowPos-pos))*speed;
+							rightUI.style.top = nowPos+"px";
+						}else{
+							rightUI.style.top = pos + "px";
+						}
+					}
+					setTimeout(m,30);
+						
+				}
+				
+				
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<!--左侧缩略图-->
+		<div id="left">
+			<ul id="leftul">
+				<li val="0"><img src="img/a.jpg" alt=""/></li>
+				<li val="1"><img src="img/b.jpg" alt=""/></li>
+				<li val="1"><img src="img/c.jpg" alt=""/></li>
+				
+			</ul>
+		</div>
+		
+		<!--右侧轮播大图-->
+		<div id="right">
+			<ul id="rightul">
+				<li><img src="img/a.jpg"/></li>
+				<li><img src="img/b.jpg"/></li>
+				<li><img src="img/c.jpg"/></li>
+				
+			</ul>
+		</div>
+	</body>
+</html>

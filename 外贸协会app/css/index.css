@@ -1,0 +1,333 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+li{
+	list-style: none;
+}
+.out{
+	width: 750px;
+	height: 1920px;
+	background-color: #f1f1f1;
+	margin: 0 auto ; 
+	border: 1px solid #AAAAAA;
+}
+
+/*头部样式*/
+.out .header{
+	width: 750px;
+	height: 205px;
+	background: #272727;
+	float: left;
+	position: relative;
+}
+.out .header .search{
+	width: 750px;
+	height: 52px;
+	/*background: lightgrey;*/
+	float: left;
+	/*margin-top: 63px;*/
+	position: absolute;
+	top:63px;
+	z-index: 100;
+	
+}
+.out .header .search .now{
+	
+	margin-left: 25px;
+	display: block;
+	float: left;
+}
+
+.out .header .search .lianxi{
+	display: block;
+	float: right;
+	margin-right: 32px;
+}
+/*下拉列表*/
+.out .header ul{
+	width: 70px;
+	height: 24px;
+	display: block;
+	float: left;
+	overflow: hidden;
+	margin-top: 15px;
+	/*line-height: 24px;*/
+	/*margin: 15px;*/
+	/*border: 1px solid #505052;*/
+	z-index: 100;
+	
+}
+.out .header ul li{
+	width: 100%;
+	height: 100%;
+	color: #fff;
+	font-size: 16px;
+	text-align: center;
+	line-height: 24px;
+	border-radius: 5px;
+	background-color: #272727;
+	
+}
+.out .header ul li#blank:hover{
+	background-color: #272727;
+}
+.out .header ul li:hover{
+	cursor: pointer;
+	background-color: #777777;
+}
+.out .header .search .jiantou{
+	/*background-color: red;
+	width: 20px;
+	height: 24px;*/
+	display: block;
+	float: left;
+}
+.out .header .search .jiantou:hover{
+	cursor: pointer;
+}
+
+
+/*设置inSearch的部分*/
+.out .header .search .inSearch{
+	width: 470px;
+	height: 55px;
+	float: left;
+	background: #505052;
+	margin-left: 30px;
+}
+
+.out .header .search .inSearch .sousuo{
+	float: left;
+	margin-left: 30px;
+}
+.out .header .search .inSearch input{
+	width: 300px;
+	height: 55px;
+	background: none;
+	border: 0;
+	color: #fff;
+	font-size: 26px;
+	line-height: 55px;
+	margin-left: 20px;
+	
+}
+
+/*设置选项卡的样式*/
+.out .header .xuan{
+	width: 750px;
+	height: 70px;
+	float: left;
+	margin-top: 18px;
+	/*background-color: yellow;*/
+	position: absolute;
+	top: 112px;
+}
+.out .header .xuan .div{
+	width: 120px;
+	height: 70px;
+	float: left;
+	line-height: 70px;
+	color: #fff;
+	text-align: center;
+	font-size: 24px;
+	
+}
+.out .header .xuan .div:hover{
+	cursor: pointer;
+	/*color: orange;
+	border-bottom: 5px solid orange;*/
+}
+
+/*div2的样式*/
+.out .div2{
+	width: 750px;
+	height: 355px;
+	float: left;
+	display: none;
+	/*background-color: yellow;*/
+	border-bottom: 2px solid orange;
+}
+.out #on{
+	display: block;
+	
+}
+.out .yangshi{
+	color: orange;
+	border-bottom: 5px solid orange;
+}
+
+
+
+
+/*轮播图的样式*/
+/*.out .lunbo{
+	width: 750px;
+	height: 355px;
+	background: #fff;
+	float: left;
+	
+}*/
+
+/*中间主体部分*/
+.out .section{
+	width: 750px;
+	height: 1255px;
+	/*background-color: yellowgreen;*/
+	float: left;
+}
+.out .shang{
+	width: 750px;
+	height: 725px;
+	float: left;
+}
+.out .xia{
+	width: 750px;
+	height: 530px;
+	float: left;
+}
+.out .section .xuan2{
+	width: 750px;
+	height: 93px;
+	background-color: #fff;
+	/*border-top:2px solid orange;*/
+}
+.out .section .xuan3{
+	width: 750px;
+	height: 93px;
+	background-color: #fff;
+}
+.out .section .xuan2 .div3{
+	width: 165px;
+	height: 93px;
+	float: left;
+	line-height: 93px;
+	text-align: center;
+	font-size: 24px;
+	font-family: 黑体;
+}
+.out .section .xuan3 .div5{
+	width: 165px;
+	height: 93px;
+	/*background-color: burlywood;*/
+	line-height: 93px;
+	float: left;
+	text-align: center;
+	font-size: 24px;
+	
+	
+	
+}
+.out .section .xuan2 .div3:hover,.xuan3 .div5:hover{
+	cursor: pointer;
+	/*border-bottom: 5px solid orange;
+	color: orange;*/
+}
+.out .section .div4{
+	width: 750px;
+	height: 625px;
+	background-color: #fff;
+	display:none;
+	margin-top: 5px;
+}
+.out .section .div6{
+	width:750px ;
+	height: 440px;
+	margin-top: 5px;
+	background-color:#fff;
+	display: none;
+}
+/*选项卡中text的部分*/
+.out .section .div4 .text{
+	width: 750px;
+	height: 156px;
+	float: left;
+	border-bottom: 1px solid #aaaaaa;
+}
+.out .section .div4 .text img{
+	margin: 11px;
+	display: block;
+	float: left;
+}
+.out .section .div4 .text .text_text{
+	width: 533px;
+	height: 138px;
+
+	float: right;
+	margin-right: 30px;
+	margin-top: 12px;
+}
+.out .section .div4 .text .text_text .one{
+	width: 533px;
+	height: 96px;
+
+	line-height: 48px;
+	
+}
+.out .section .div4 .text .text_text .one .left{
+	float: left;
+	width: 330px;
+	font-size: 24px;
+}
+.out .section .div4 .text .text_text .one .right{
+	float: right;
+	font-size: 16px;
+	color: #777777;
+}
+.out .section .div4 .text .text_text .two{
+	width: 533px;
+	height: 48px;
+	line-height: 48px;
+}
+.out .section .div4 .text .text_text .two .left{
+	float: left;
+	font-size: 20px;
+	color: #777777;
+}
+.out .section .div4 .text .text_text .two .right{
+	float: right;
+	font-size: 24px;
+	color: #ff602a;
+}
+.out .section .div6 div{
+	width: 750px;
+	height: 105px;
+	/*background-color: yellow;*/
+	border-bottom: 1px solid #aaaaaa;
+}
+.out .section .div6 div .left{
+	width: 550px;
+	height: 105px;
+	line-height: 105px;
+	font-size: 24px;
+	color: #343434;
+	float: left;
+}
+.out .section .div6 div .right{
+	width: 110px;
+	height: 105px;
+	line-height: 105px;
+	float: right;
+	margin-right: 30px;
+	font-size: 16px;
+	color: #777777;
+}
+
+
+
+/*脚本部分*/
+.out .footer{
+	width: 750px;
+	height: 110px;
+	background-color: #272727;
+	float: left;
+}
+.out .footer img{
+	width: 50px;
+	height: 75px;
+	display: inline-block;
+	margin: 20px 45px;
+}
+.out .footer img:hover{
+	cursor: pointer;
+}
